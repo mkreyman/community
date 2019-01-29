@@ -10,12 +10,19 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :congregation, CongregationWeb.Endpoint,
-  http: [:inet6, port: System.get_env("PORT") || 4000],
-  url: [host: "example.com", port: 80],
+  load_from_system_env: true,
+  url: [scheme: "https", host: "pure-headland-69281.herokuapp.com", port: 443],
+  force_ssl: [rewrite_on: [:x_forwarded_proto]],
+  secret_key_base: Map.fetch!(System.get_env(), "SECRET_KEY_BASE")
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production
 config :logger, level: :info
+
+# Mailer
+config :congregation, Congregation.Mailer,
+  adapter: Bamboo.SendGridAdapter,
+  api_key: System.get_env("SENDGRID_API_KEY") || "SendGrid API Key not set"
 
 # ## SSL Support
 #

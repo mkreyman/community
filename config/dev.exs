@@ -74,3 +74,9 @@ config :congregation, Congregation.Repo,
   password: System.get_env("DB_PASSWORD"),
   hostname: "localhost",
   pool_size: 10
+
+# Mailer
+config :congregation, Congregation.Mailer,
+  # adapter: Bamboo.LocalAdapter
+  adapter: Bamboo.SendGridAdapter,
+  api_key: System.get_env("SENDGRID_API_KEY") || "SendGrid API Key not set"

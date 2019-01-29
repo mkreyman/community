@@ -7,6 +7,7 @@ defmodule Congregation.Repo.Migrations.CreateDonors do
       add :amount, :integer
       add :address, :string
       add :email, :string
+      add :phone, :string
       add :receipt_emailed, :boolean
 
       timestamps()

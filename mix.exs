@@ -20,7 +20,7 @@ defmodule Congregation.MixProject do
   def application do
     [
       mod: {Congregation.Application, []},
-      extra_applications: [:logger, :runtime_tools, :pdf_generator]
+      extra_applications: [:logger, :runtime_tools, :pdf_generator, :bamboo]
     ]
   end
 
@@ -44,7 +44,8 @@ defmodule Congregation.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:csv, "~> 2.0.0"},
-      {:pdf_generator, ">=0.3.5"}
+      {:pdf_generator, ">=0.3.5"},
+      {:bamboo, "~> 1.1"}
     ]
   end
 

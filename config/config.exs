@@ -47,9 +47,11 @@ config :pdf_generator,
 
 config :congregation,
   tax_receipts_output_dir: "output",
-  tax_receipts_templates_dir: "templates",
+  tax_receipts_templates_dir: "lib/congregation_web/templates/tax_receipts",
   tax_receipts_template: "tax_receipt.eex",
   tax_receipts_logo: "logo.png",
+  thank_you_letter: "Letter from pastors 2018.pdf",
+  from_address: System.get_env("SENDGRID_FROM_ADDRESS") || "test@example.com",
   # don't change, as it's hardcoded in PdfGenerator
   tax_receipts_tmp_dir: System.tmp_dir()
 

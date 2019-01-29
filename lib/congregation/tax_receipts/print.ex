@@ -1,4 +1,4 @@
-defmodule Congregation.TaxReceipts do
+defmodule Congregation.TaxReceipts.Processor do
   require Logger
 
   alias Congregation.Donor
@@ -25,10 +25,10 @@ defmodule Congregation.TaxReceipts do
     end)
   end
 
-  def print do
+  def print(with_filter \\ nil) do
     copy_logo_to_tmp_dir()
 
-    Donor.with_contributions()
+    Donor.filtered(with_filter)
     |> Enum.map(&to_pdf(&1))
   end
 
