@@ -68,76 +68,66 @@ defmodule Congregation.Donor do
     end
   end
 
-  def filtered(nil), do: filtered(:current)
-
   def filtered(:current) do
     Donor
-    |> Query.where([d], not is_nil(d.amount))
-    |> Query.where([d], d.amount > 0)
+    |> current_donors()
     |> Repo.all()
   end
 
   def filtered(:with_email) do
     Donor
-    |> Query.where([d], not is_nil(d.amount))
-    |> Query.where([d], d.amount > 0)
-    |> Query.where([d], not is_nil(d.email))
-    |> Query.where([d], is_nil(d.receipt_emailed))
-    # |> Query.where([d], d.name in ["Test Donor"])
+    |> current_donors()
+    |> with_email()
+    |> have_not_been_emailed()
+    # |> on_the_list(["Test Donor"])
     |> Repo.all()
   end
 
   def filtered(:with_email_only) do
     Donor
-    |> Query.where([d], not is_nil(d.amount))
-    |> Query.where([d], d.amount > 0)
-    |> Query.where([d], not is_nil(d.email))
-    |> Query.where([d], is_nil(d.address))
-    |> Query.where([d], is_nil(d.receipt_emailed))
-    # |> Query.where([d], d.name in ["Test Donor"])
+    |> current_donors()
+    |> with_email_only()
+    |> have_not_been_emailed()
+    # |> on_the_list(["Test Donor"])
     |> Repo.all()
   end
 
   def filtered(:with_address_only) do
     Donor
-    |> Query.where([d], not is_nil(d.amount))
-    |> Query.where([d], d.amount > 0)
-    |> Query.where([d], not is_nil(d.address))
-    |> Query.where([d], is_nil(d.email))
+    |> current_donors()
+    |> with_address()
+    |> with_no_email()
     |> Repo.all()
   end
 
   def filtered(:no_address) do
     Donor
-    |> Query.where([d], not is_nil(d.amount))
-    |> Query.where([d], d.amount > 0)
-    |> Query.where([d], is_nil(d.address))
-    |> Query.where([d], is_nil(d.email))
+    |> current_donors()
+    |> with_no_address()
+    |> with_no_email()
     |> Repo.all()
   end
 
   def filtered(:with_address_and_email) do
     Donor
-    |> Query.where([d], not is_nil(d.amount))
-    |> Query.where([d], d.amount > 0)
-    |> Query.where([d], not is_nil(d.address))
-    |> Query.where([d], not is_nil(d.email))
-    |> Query.where([d], is_nil(d.receipt_emailed))
-    # |> Query.where([d], d.name in ["Test Donor"])
+    |> current_donors()
+    |> with_address()
+    |> with_email()
+    |> have_not_been_emailed()
+    # |> on_the_list(["Test Donor"])
     |> Repo.all()
   end
 
   def filtered(:receipt_emailed) do
     Donor
-    |> Query.where([d], not is_nil(d.amount))
-    |> Query.where([d], d.amount > 0)
-    |> Query.where([d], d.receipt_emailed)
+    |> current_donors()
+    |> have_been_emailed()
     |> Repo.all()
   end
 
   def filtered(:zero) do
     Donor
-    |> Query.where([d], is_nil(d.amount) or d.amount == 0)
+    |> not_current_donors()
     |> Repo.all()
   end
 
@@ -154,5 +144,57 @@ defmodule Congregation.Donor do
     Donor
     |> Query.where([d], ilike(d.name, ^"%#{name}%"))
     |> Repo.all()
+  end
+
+  def current_donors(query \\ Donor) do
+    query
+    |> Query.where([d], not is_nil(d.amount))
+    |> Query.where([d], d.amount > 0)
+  end
+
+  def not_current_donors(query \\ Donor) do
+    query
+    |> Query.where([d], is_nil(d.amount) or d.amount == 0)
+  end
+
+  def with_email(query \\ Donor) do
+    query
+    |> Query.where([d], not is_nil(d.email))
+  end
+
+  def with_address(query \\ Donor) do
+    query
+    |> Query.where([d], not is_nil(d.address))
+  end
+
+  def with_email_only(query \\ Donor) do
+    query
+    |> with_email()
+    |> with_no_address()
+  end
+
+  def have_not_been_emailed(query \\ Donor) do
+    query
+    |> Query.where([d], is_nil(d.receipt_emailed))
+  end
+
+  def have_been_emailed(query \\ Donor) do
+    query
+    |> Query.where([d], d.receipt_emailed)
+  end
+
+  def on_the_list(query \\ Donor, names_list) when is_list(names_list) do
+    query
+    |> Query.where([d], d.name in ^names_list)
+  end
+
+  def with_no_email(query \\ Donor) do
+    query
+    |> Query.where([d], is_nil(d.email))
+  end
+
+  def with_no_address(query \\ Donor) do
+    query
+    |> Query.where([d], is_nil(d.address))
   end
 end
