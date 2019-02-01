@@ -6,7 +6,7 @@ use Mix.Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
-config :congregation, CongregationWeb.Endpoint,
+config :community, CommunityWeb.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
@@ -46,13 +46,13 @@ config :congregation, CongregationWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :congregation, CongregationWeb.Endpoint,
+config :community, CommunityWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
-      ~r{lib/congregation_web/views/.*(ex)$},
-      ~r{lib/congregation_web/templates/.*(eex)$}
+      ~r{lib/community_web/views/.*(ex)$},
+      ~r{lib/community_web/templates/.*(eex)$}
     ]
   ]
 
@@ -67,16 +67,16 @@ config :phoenix, :stacktrace_depth, 20
 config :phoenix, :plug_init_mode, :runtime
 
 # Configure your database
-config :congregation, Congregation.Repo,
+config :community, Community.Repo,
   adapter: Ecto.Adapters.Postgres,
-  database: "congregation_#{Mix.env()}",
+  database: "community_#{Mix.env()}",
   username: System.get_env("DB_USER"),
   password: System.get_env("DB_PASSWORD"),
   hostname: "localhost",
   pool_size: 10
 
 # Mailer
-config :congregation, Congregation.Mailer,
+config :community, Community.Mailer,
   # adapter: Bamboo.LocalAdapter
   adapter: Bamboo.SendGridAdapter,
   api_key: System.get_env("SENDGRID_API_KEY") || "SendGrid API Key not set"

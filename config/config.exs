@@ -7,15 +7,15 @@
 # General application configuration
 use Mix.Config
 
-config :congregation,
-  ecto_repos: [Congregation.Repo]
+config :community,
+  ecto_repos: [Community.Repo]
 
 # Configures the endpoint
-config :congregation, CongregationWeb.Endpoint,
+config :community, CommunityWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "pdFC4H/FS/ZzEbDL6HTz+jwLAZGDMaxXGItjtF6ZjSs4t6BiHlSzCfB7G5Nz7ZKD",
-  render_errors: [view: CongregationWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Congregation.PubSub, adapter: Phoenix.PubSub.PG2]
+  render_errors: [view: CommunitynWeb.ErrorView, accepts: ~w(html json)],
+  pubsub: [name: Community.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -45,9 +45,9 @@ config :pdf_generator,
     "8"
   ]
 
-config :congregation,
+config :community,
   tax_receipts_output_dir: "output",
-  tax_receipts_templates_dir: "lib/congregation_web/templates/tax_receipts",
+  tax_receipts_templates_dir: "lib/community_web/templates/tax_receipts",
   tax_receipts_template: "tax_receipt.eex",
   tax_receipts_logo: "logo.png",
   thank_you_letter: "Letter from pastors 2018.pdf",

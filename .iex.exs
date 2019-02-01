@@ -1,10 +1,14 @@
-alias Congregation.{
-    Repo,
-    Donor,
-    Mailer
-  }
+alias Community.{
+  Repo,
+  Mailer
+}
 
-alias Congregation.TaxReceipts.{
-    Email,
-    Processor
-  }
+alias Community.TaxReceipts.{
+  Email,
+  Processor
+}
+
+alias Community.Contributions
+alias Community.Accounts
+alias Community.Contributions.Donor
+alias Community.Accounts.User

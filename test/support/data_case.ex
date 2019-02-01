@@ -1,4 +1,4 @@
-defmodule Congregation.DataCase do
+defmodule Community.DataCase do
   @moduledoc """
   This module defines the setup for tests requiring
   access to the application's data layer.
@@ -16,20 +16,20 @@ defmodule Congregation.DataCase do
 
   using do
     quote do
-      alias Congregation.Repo
+      alias Community.Repo
 
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import Congregation.DataCase
+      import Community.DataCase
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Congregation.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Community.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Congregation.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Community.Repo, {:shared, self()})
     end
 
     :ok

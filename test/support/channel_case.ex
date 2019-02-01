@@ -1,4 +1,4 @@
-defmodule CongregationWeb.ChannelCase do
+defmodule CommunityWeb.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -21,15 +21,15 @@ defmodule CongregationWeb.ChannelCase do
       use Phoenix.ChannelTest
 
       # The default endpoint for testing
-      @endpoint CongregationWeb.Endpoint
+      @endpoint CommunityWeb.Endpoint
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Congregation.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Community.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Congregation.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Community.Repo, {:shared, self()})
     end
 
     :ok

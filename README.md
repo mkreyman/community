@@ -1,4 +1,4 @@
-# Congregation
+# Community
 
 ## Description
 
@@ -14,7 +14,7 @@ csv = "../../tmp/Sales by Customer Summary with address and email.CSV"  # path r
 headers = [:name, :amount, :address, :email]  # should be no headers row in the csv file.
 TaxReceipts.parse(csv, headers)
 
-Congregation.TaxReceipts.print()
+Community.TaxReceipts.print()
 ```
 
 Generated pdf files should appear in `output` directory.

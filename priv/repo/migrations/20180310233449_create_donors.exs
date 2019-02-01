@@ -1,4 +1,4 @@
-defmodule Congregation.Repo.Migrations.CreateDonors do
+defmodule Community.Repo.Migrations.CreateDonors do
   use Ecto.Migration
 
   def change do

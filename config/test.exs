@@ -2,7 +2,7 @@ use Mix.Config
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
-config :congregation, CongregationWeb.Endpoint,
+config :community, CommunityWeb.Endpoint,
   http: [port: 4002],
   server: false
 
@@ -10,9 +10,9 @@ config :congregation, CongregationWeb.Endpoint,
 config :logger, level: :warn
 
 # Configure your database
-config :congregation, Congregation.Repo,
+config :community, Community.Repo,
   adapter: Ecto.Adapters.Postgres,
-  database: "congregation_#{Mix.env()}",
+  database: "community_#{Mix.env()}",
   username: "postgres",
   password: "",
   hostname: "localhost",
