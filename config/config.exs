@@ -55,6 +55,15 @@ config :community,
   # don't change, as it's hardcoded in PdfGenerator
   tax_receipts_tmp_dir: System.tmp_dir()
 
+config :money,
+  default_currency: :USD,
+  separator: "",
+  delimeter: ".",
+  symbol: false,
+  symbol_on_right: false,
+  symbol_space: false
+
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
