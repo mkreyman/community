@@ -7,11 +7,9 @@ defmodule Community.Contributions.Donor do
   alias Community.Contributions.Donor
   alias Ecto.Query
 
-  # defstruct [:id, :name, :amount, :address, :email, :phone, :receipt_emailed]
-
   schema "donors" do
     field(:name, :string)
-    field(:amount, :integer)
+    field(:amount, Money.Ecto.Type)
     field(:address, :string)
     field(:email, :string)
     field(:phone, :string)
