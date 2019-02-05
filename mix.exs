@@ -46,7 +46,9 @@ defmodule Community.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:csv, "~> 2.0.0"},
       {:pdf_generator, ">=0.3.5"},
-      {:bamboo, "~> 1.1"}
+      {:bamboo, "~> 1.1"},
+      {:comeonin, "~> 4.1"},
+      {:pbkdf2_elixir, "~> 0.12"}
     ]
   end
 
