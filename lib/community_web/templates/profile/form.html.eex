@@ -1,0 +1,63 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <%= label f, :additional_name %>
+  <%= text_input f, :additional_name %>
+  <%= error_tag f, :additional_name %>
+
+  <%= label f, :alternative_name %>
+  <%= text_input f, :alternative_name %>
+  <%= error_tag f, :alternative_name %>
+
+  <%= label f, :alumni_of %>
+  <%= text_input f, :alumni_of %>
+  <%= error_tag f, :alumni_of %>
+
+  <%= label f, :birth_date %>
+  <%= date_input f, :birth_date %>
+  <%= error_tag f, :birth_date %>
+
+  <%= label f, :birth_place %>
+  <%= text_input f, :birth_place %>
+  <%= error_tag f, :birth_place %>
+
+  <%= label f, :death_date %>
+  <%= date_input f, :death_date %>
+  <%= error_tag f, :death_date %>
+
+  <%= label f, :family_name %>
+  <%= text_input f, :family_name %>
+  <%= error_tag f, :family_name %>
+
+  <%= label f, :gender %>
+  <%= text_input f, :gender %>
+  <%= error_tag f, :gender %>
+
+  <%= label f, :given_name %>
+  <%= text_input f, :given_name %>
+  <%= error_tag f, :given_name %>
+
+  <%= label f, :honorific_prefix %>
+  <%= text_input f, :honorific_prefix %>
+  <%= error_tag f, :honorific_prefix %>
+
+  <%= label f, :honorific_suffix %>
+  <%= text_input f, :honorific_suffix %>
+  <%= error_tag f, :honorific_suffix %>
+
+  <%= label f, :image %>
+  <%= text_input f, :image %>
+  <%= error_tag f, :image %>
+
+  <%= label f, :nationality %>
+  <%= text_input f, :nationality %>
+  <%= error_tag f, :nationality %>
+
+  <div>
+    <%= submit "Save" %>
+  </div>
+<% end %>

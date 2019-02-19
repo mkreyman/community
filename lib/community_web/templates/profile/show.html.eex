@@ -1,0 +1,73 @@
+<h1>Show Profile</h1>
+
+<ul>
+
+  <li>
+    <strong>Additional name:</strong>
+    <%= @profile.additional_name %>
+  </li>
+
+  <li>
+    <strong>Alternative name:</strong>
+    <%= @profile.alternative_name %>
+  </li>
+
+  <li>
+    <strong>Alumni of:</strong>
+    <%= @profile.alumni_of %>
+  </li>
+
+  <li>
+    <strong>Birth date:</strong>
+    <%= @profile.birth_date %>
+  </li>
+
+  <li>
+    <strong>Birth place:</strong>
+    <%= @profile.birth_place %>
+  </li>
+
+  <li>
+    <strong>Death date:</strong>
+    <%= @profile.death_date %>
+  </li>
+
+  <li>
+    <strong>Family name:</strong>
+    <%= @profile.family_name %>
+  </li>
+
+  <li>
+    <strong>Gender:</strong>
+    <%= @profile.gender %>
+  </li>
+
+  <li>
+    <strong>Given name:</strong>
+    <%= @profile.given_name %>
+  </li>
+
+  <li>
+    <strong>Honorific prefix:</strong>
+    <%= @profile.honorific_prefix %>
+  </li>
+
+  <li>
+    <strong>Honorific suffix:</strong>
+    <%= @profile.honorific_suffix %>
+  </li>
+
+  <li>
+    <strong>Image:</strong>
+    <%= @profile.image %>
+  </li>
+
+  <li>
+    <strong>Nationality:</strong>
+    <%= @profile.nationality %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.profile_path(@conn, :edit, @profile) %></span>
+<span><%= link "Back", to: Routes.profile_path(@conn, :index) %></span>

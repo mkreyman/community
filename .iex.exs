@@ -15,3 +15,4 @@ alias Community.Accounts
 alias Community.Contributions.Donor
 alias Community.Accounts.User
 alias Community.Accounts.Credential
+alias Community.Members.Profile

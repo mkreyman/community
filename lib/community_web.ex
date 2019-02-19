@@ -23,6 +23,7 @@ defmodule CommunityWeb do
 
       import Plug.Conn
       import CommunityWeb.Gettext
+      import CommunityWeb.Auth, only: [authenticate_user: 2]
       alias CommunityWeb.Router.Helpers, as: Routes
     end
   end
@@ -50,6 +51,7 @@ defmodule CommunityWeb do
       use Phoenix.Router
       import Plug.Conn
       import Phoenix.Controller
+      import CommunityWeb.Auth, only: [authenticate_user: 2]
     end
   end
 

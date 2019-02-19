@@ -1,0 +1,48 @@
+<h1>Listing Profiles</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Additional name</th>
+      <th>Alternative name</th>
+      <th>Alumni of</th>
+      <th>Birth date</th>
+      <th>Birth place</th>
+      <th>Family name</th>
+      <th>Gender</th>
+      <th>Given name</th>
+      <th>Honorific prefix</th>
+      <th>Honorific suffix</th>
+      <th>Image</th>
+      <th>Nationality</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for profile <- [@profile] do %>
+    <tr>
+      <td><%= profile.additional_name %></td>
+      <td><%= profile.alternative_name %></td>
+      <td><%= profile.alumni_of %></td>
+      <td><%= profile.birth_date %></td>
+      <td><%= profile.birth_place %></td>
+      <td><%= profile.family_name %></td>
+      <td><%= profile.gender %></td>
+      <td><%= profile.given_name %></td>
+      <td><%= profile.honorific_prefix %></td>
+      <td><%= profile.honorific_suffix %></td>
+      <td><%= profile.image %></td>
+      <td><%= profile.nationality %></td>
+
+      <td>
+        <%= link "Show", to: Routes.profile_path(@conn, :show, profile) %>
+        <%= link "Edit", to: Routes.profile_path(@conn, :edit, profile) %>
+        <%= link "Delete", to: Routes.profile_path(@conn, :delete, profile), method: :delete, data: [confirm: "Are you sure?"] %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Profile", to: Routes.profile_path(@conn, :new) %></span>

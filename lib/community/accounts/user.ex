@@ -5,7 +5,6 @@ defmodule Community.Accounts.User do
   alias Community.Accounts.Credential
 
   schema "users" do
-    field :name, :string
     field :username, :string
     has_one :credential, Credential
 
@@ -20,8 +19,8 @@ defmodule Community.Accounts.User do
 
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:name, :username])
-    |> validate_required([:name, :username])
+    |> cast(attrs, [:username])
+    |> validate_required([:username])
     |> unique_constraint(:username)
     |> validate_length(:username, min: 1, max: 20)
   end

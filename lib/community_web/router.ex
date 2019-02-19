@@ -26,6 +26,12 @@ defmodule CommunityWeb.Router do
     resources "/sessions", SessionController, only: [:new, :create, :delete]
   end
 
+  scope "/manage", CommunityWeb do
+    pipe_through [:browser, :authenticate_user]
+
+    resources "/profile", ProfileController
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", CommunityWeb do
   #   pipe_through :api

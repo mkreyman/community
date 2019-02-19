@@ -1,4 +1,4 @@
 <section class="phx-hero">
-  <h1><%= gettext "Welcome to %{name}!", name: "Rumbl.io" %></h1>
-  <p>Rumbl out loud.</p>
+  <h1><%= gettext "Welcome to %{name}!", name: "Bethel Community" %></h1>
+  <p>There's a place for everyone.</p>
 </section>
