@@ -22,6 +22,11 @@ user2_params = %{
   "credential" => %{email: "test2@example.com", password: "qwerty123"}
 }
 
+user3_params = %{
+  "username" => "test3",
+  "credential" => %{email: "test3@example.com", password: "qwerty123"}
+}
+
 user1_profile = %{
   additional_name: nil,
   alternative_name: "One",
@@ -54,6 +59,8 @@ user2_profile = %{
 
 {:ok, user1} = Accounts.register_user(user1_params)
 {:ok, user2} = Accounts.register_user(user2_params)
+{:ok, _user3} = Accounts.register_user(user3_params)
 
-Members.create_profile(user1, user1_profile)
-Members.create_profile(user2, user2_profile)
+Members.update_profile(user1.profile, user1_profile)
+Members.update_profile(user2.profile, user2_profile)
+

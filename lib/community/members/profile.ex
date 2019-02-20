@@ -39,6 +39,6 @@ defmodule Community.Members.Profile do
   def changeset(profile, attrs) do
     profile
     |> cast(attrs, @attrs)
-    |> validate_required([:family_name, :given_name])
+    |> unique_constraint(:user_id)
   end
 end

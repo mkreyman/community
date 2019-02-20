@@ -63,6 +63,7 @@ defmodule Community.Accounts do
   def register_user(attrs \\ %{}) do
     %User{}
     |> User.registration_changeset(attrs)
+    |> User.profile_changeset(attrs |> Map.put("profile", %{}))
     |> Repo.insert()
   end
 

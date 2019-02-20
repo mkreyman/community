@@ -15,11 +15,11 @@ defmodule Community.Repo.Migrations.CreateProfiles do
       add :honorific_suffix, :string
       add :image, :string
       add :nationality, :string
-      add :user_id, references(:users, on_delete: :nothing)
+      add :user_id, references(:users, on_delete: :delete_all), null: false
 
       timestamps()
     end
 
-    create index(:profiles, [:user_id])
+    create unique_index(:profiles, [:user_id])
   end
 end
