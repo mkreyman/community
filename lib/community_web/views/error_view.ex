@@ -7,6 +7,10 @@ defmodule CommunityWeb.ErrorView do
   #   "Internal Server Error"
   # end
 
+  def render("401.html", _assigns) do
+    "Unauthorized"
+  end
+
   # By default, Phoenix returns the status message from
   # the template name. For example, "404.html" becomes
   # "Not Found".

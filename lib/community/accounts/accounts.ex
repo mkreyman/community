@@ -6,6 +6,7 @@ defmodule Community.Accounts do
   import Ecto.Query, warn: false
   alias Community.Repo
   alias Community.Accounts.User
+  # use Util.PipeDebug
 
   def get_user(id) do
     Repo.get(User, id)

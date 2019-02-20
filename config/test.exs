@@ -9,6 +9,9 @@ config :community, CommunityWeb.Endpoint,
 # Print only warnings and errors during test
 config :logger, level: :warn
 
+# Enable or disable PipeDebug: true means silencio
+config :logger, :shut_up_pipe_debug, false
+
 # Configure your database
 config :community, Community.Repo,
   adapter: Ecto.Adapters.Postgres,

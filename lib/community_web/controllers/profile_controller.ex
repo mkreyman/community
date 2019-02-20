@@ -11,7 +11,11 @@ defmodule CommunityWeb.ProfileController do
 
   def index(conn, _params, current_user) do
     profile = Members.list_user_profile(current_user)
-    render(conn, "index.html", profile: profile)
+    if profile do
+      render(conn, "index.html", profile: profile)
+    else
+      render_unauthorized(conn)
+    end
   end
 
   def new(conn, _params, current_user) do
@@ -32,18 +36,22 @@ defmodule CommunityWeb.ProfileController do
   end
 
   def show(conn, %{"id" => id}, current_user) do
-    profile = Members.get_user_profile!(current_user, id)
-    render(conn, "show.html", profile: profile)
+    profile = Members.get_user_profile(current_user, id)
+    if profile do
+      render(conn, "show.html", profile: profile)
+    else
+      render_unauthorized(conn)
+    end
   end
 
   def edit(conn, %{"id" => id}, current_user) do
-    profile = Members.get_user_profile!(current_user, id)
+    profile = Members.get_user_profile(current_user, id)
     changeset = Members.change_profile(current_user, profile)
     render(conn, "edit.html", profile: profile, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "profile" => profile_params}, current_user) do
-    profile = Members.get_user_profile!(current_user, id)
+    profile = Members.get_user_profile(current_user, id)
 
     case Members.update_profile(profile, profile_params) do
       {:ok, profile} ->
@@ -57,11 +65,19 @@ defmodule CommunityWeb.ProfileController do
   end
 
   def delete(conn, %{"id" => id}, current_user) do
-    profile = Members.get_user_profile!(current_user, id)
+    profile = Members.get_user_profile(current_user, id)
     {:ok, _profile} = Members.delete_profile(profile)
 
     conn
     |> put_flash(:info, "Profile deleted successfully.")
     |> redirect(to: Routes.profile_path(conn, :index))
+  end
+
+  defp render_unauthorized(conn) do
+    conn
+    |> put_status(:unauthorized)
+    |> put_view(CommunityWeb.ErrorView)
+    |> render("401.html")
+    |> halt()
   end
 end

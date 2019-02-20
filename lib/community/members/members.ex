@@ -7,6 +7,7 @@ defmodule Community.Members do
   alias Community.Repo
   alias Community.Members.Profile
   alias Community.Accounts
+  # use Util.PipeDebug
 
   @doc """
   Returns the list of profiles.
@@ -24,17 +25,27 @@ defmodule Community.Members do
   end
 
   def list_user_profile(%Accounts.User{} = user) do
-    Profile
-    |> user_profile_query(user)
-    |> Repo.one!()
-    |> preload_user()
+    profile =
+      Profile
+      |> user_profile_query(user)
+      |> Repo.one()
+
+    case profile do
+      nil -> nil
+      profile -> preload_user(profile)
+    end
   end
 
-  def get_user_profile!(%Accounts.User{} = user, id) do
-    from(p in Profile, where: p.id == ^id)
-    |> user_profile_query(user)
-    |> Repo.one!()
-    |> preload_user()
+  def get_user_profile(%Accounts.User{} = user, id) do
+    profile =
+      from(p in Profile, where: p.id == ^id)
+      |> user_profile_query(user)
+      |> Repo.one()
+
+    case profile do
+      nil -> nil
+      profile -> preload_user(profile)
+    end
   end
 
   defp user_profile_query(query, %Accounts.User{id: user_id}) do

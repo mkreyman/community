@@ -28,11 +28,6 @@
   </li>
 
   <li>
-    <strong>Death date:</strong>
-    <%= @profile.death_date %>
-  </li>
-
-  <li>
     <strong>Family name:</strong>
     <%= @profile.family_name %>
   </li>
