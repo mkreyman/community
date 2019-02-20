@@ -12,8 +12,15 @@
 
 alias Community.{Accounts, Members}
 
-user1_params = %{"username" => "test1", "credential" => %{email: "test1@example.com", password: "qwerty123"}}
-user2_params = %{"username" => "test2", "credential" => %{email: "test2@example.com", password: "qwerty123"}}
+user1_params = %{
+  "username" => "test1",
+  "credential" => %{email: "test1@example.com", password: "qwerty123"}
+}
+
+user2_params = %{
+  "username" => "test2",
+  "credential" => %{email: "test2@example.com", password: "qwerty123"}
+}
 
 user1_profile = %{
   additional_name: nil,

@@ -68,7 +68,7 @@ defmodule Community.Members do
   """
   def get_profile!(id), do: preload_user(Repo.get!(Profile, id))
 
-  defp preload_user(profile) do 
+  defp preload_user(profile) do
     Repo.preload(profile, :user)
   end
 

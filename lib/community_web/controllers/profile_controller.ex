@@ -11,6 +11,7 @@ defmodule CommunityWeb.ProfileController do
 
   def index(conn, _params, current_user) do
     profile = Members.list_user_profile(current_user)
+
     if profile do
       render(conn, "index.html", profile: profile)
     else
@@ -37,6 +38,7 @@ defmodule CommunityWeb.ProfileController do
 
   def show(conn, %{"id" => id}, current_user) do
     profile = Members.get_user_profile(current_user, id)
+
     if profile do
       render(conn, "show.html", profile: profile)
     else
