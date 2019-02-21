@@ -10,7 +10,9 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
+alias Community.Repo
 alias Community.{Accounts, Members}
+alias Community.Members.{Address, UserAddress}
 
 user1_params = %{
   "username" => "test1",
@@ -57,10 +59,52 @@ user2_profile = %{
   nationality: "Poland"
 }
 
+user1_address = %{
+  country: "USA",
+  locality: "Denver",
+  region: "CO",
+  po_box: nil,
+  postal_code: "80211",
+  street_address: "123 Main St",
+  address_type: "business"
+}
+
+user2_address = %{
+  country: "USA",
+  locality: "Arvada",
+  region: "CO",
+  po_box: nil,
+  postal_code: "80001",
+  street_address: "456 W Curvey Cir",
+  address_type: "residential"
+}
+
+user3_address = %{
+  country: "Ukraine",
+  locality: "Kiev",
+  region: nil,
+  po_box: "2111",
+  postal_code: "365879",
+  street_address: "111 Taras Bulba St",
+  address_type: nil
+}
+
 {:ok, user1} = Accounts.register_user(user1_params)
 {:ok, user2} = Accounts.register_user(user2_params)
-{:ok, _user3} = Accounts.register_user(user3_params)
+{:ok, user3} = Accounts.register_user(user3_params)
 
 Members.update_profile(user1.profile, user1_profile)
 Members.update_profile(user2.profile, user2_profile)
 
+# {:ok, address2} =
+#   %Address{}
+#   |> Address.changeset(user2_address)
+#   |> Repo.insert()
+
+# %UserAddress{}
+# |> UserAddress.changeset(%{user_id: user1.id, address_id: address2.id})
+# |> Repo.insert!()
+
+Members.create_address(user1, user1_address)
+Members.create_address(user2, user2_address)
+Members.create_address(user3, user3_address)

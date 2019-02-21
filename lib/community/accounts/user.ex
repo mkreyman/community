@@ -3,12 +3,13 @@ defmodule Community.Accounts.User do
   import Ecto.Changeset
 
   alias Community.Accounts.Credential
-  alias Community.Members.Profile
+  alias Community.Members.{Profile, Address, UserAddress}
 
   schema "users" do
     field :username, :string
     has_one :credential, Credential
     has_one :profile, Profile
+    many_to_many :addresses, Address, join_through: UserAddress
 
     timestamps()
   end
@@ -22,7 +23,7 @@ defmodule Community.Accounts.User do
   def profile_changeset(user, params) do
     user
     |> changeset(params)
-    |> cast_assoc(:profile, with: &Profile.changeset/2, required: false)
+    |> cast_assoc(:profile, with: &Profile.changeset/2, required: true)
   end
 
   def changeset(user, attrs) do

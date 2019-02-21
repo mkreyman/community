@@ -5,9 +5,17 @@ defmodule Community.Members do
 
   import Ecto.Query, warn: false
   alias Community.Repo
-  alias Community.Members.Profile
+  alias Community.Members.{Profile, Address, UserAddress}
   alias Community.Accounts
   # use Util.PipeDebug
+
+  def create_address(%Accounts.User{} = user, attrs \\ %{}) do
+    with {:ok, address} <- %Address{} |> Address.changeset(attrs) |> Repo.insert() do
+      %UserAddress{}
+      |> UserAddress.changeset(%{user_id: user.id, address_id: address.id})
+      |> Repo.insert()
+    end
+  end
 
   @doc """
   Returns the list of profiles.
