@@ -6,15 +6,49 @@ defmodule Community.Members do
   import Ecto.Query, warn: false
   alias Community.Repo
   alias Community.Members.{Profile, Address, UserAddress}
-  alias Community.Accounts
+  alias Community.Accounts.User
   # use Util.PipeDebug
 
-  def create_address(%Accounts.User{} = user, attrs \\ %{}) do
+  def create_address(%User{} = user, attrs \\ %{}) do
     with {:ok, address} <- %Address{} |> Address.changeset(attrs) |> Repo.insert() do
       %UserAddress{}
       |> UserAddress.changeset(%{user_id: user.id, address_id: address.id})
       |> Repo.insert()
     end
+  end
+
+  def list_addresses() do
+    Address
+    |> Repo.all()
+    |> preload_user()
+  end
+
+  def list_user_addresses(%User{} = user) do
+    UserAddress
+    |> user_assoc_query(user)
+    |> Repo.all()
+    |> preload_address()
+    |> Enum.map(fn user_address -> user_address.address end)
+  end
+
+  def find_address(%Address{} = address) do
+    Address
+    |> address_query(address)
+    |> Repo.one()
+  end
+
+  def add_user_to_address(%User{} = user, %Address{} = address) do
+    %UserAddress{}
+    |> UserAddress.changeset(%{user_id: user.id, address_id: address.id})
+    |> Repo.insert()
+  end
+
+  defp address_query(query, %Address{id: address_id}) do
+    from(a in query, where: a.id == ^address_id)
+  end
+
+  defp preload_address(assoc) do
+    Repo.preload(assoc, :address)
   end
 
   @doc """
@@ -26,16 +60,16 @@ defmodule Community.Members do
       [%Profile{}, ...]
 
   """
-  def list_profiles do
+  def list_profiles() do
     Profile
     |> Repo.all()
     |> preload_user()
   end
 
-  def list_user_profile(%Accounts.User{} = user) do
+  def list_user_profile(%User{} = user) do
     profile =
       Profile
-      |> user_profile_query(user)
+      |> user_assoc_query(user)
       |> Repo.one()
 
     case profile do
@@ -44,10 +78,10 @@ defmodule Community.Members do
     end
   end
 
-  def get_user_profile(%Accounts.User{} = user, id) do
+  def get_user_profile(%User{} = user, id) do
     profile =
       from(p in Profile, where: p.id == ^id)
-      |> user_profile_query(user)
+      |> user_assoc_query(user)
       |> Repo.one()
 
     case profile do
@@ -56,8 +90,8 @@ defmodule Community.Members do
     end
   end
 
-  defp user_profile_query(query, %Accounts.User{id: user_id}) do
-    from(p in query, where: p.user_id == ^user_id)
+  defp user_assoc_query(query, %User{id: user_id}) do
+    from(a in query, where: a.user_id == ^user_id)
   end
 
   @doc """
@@ -76,8 +110,12 @@ defmodule Community.Members do
   """
   def get_profile!(id), do: preload_user(Repo.get!(Profile, id))
 
-  defp preload_user(profile) do
-    Repo.preload(profile, :user)
+  defp preload_user(assoc) do
+    Repo.preload(assoc, :user)
+  end
+
+  defp preload_users(assoc) do
+    Repo.preload(assoc, :users)
   end
 
   @doc """
@@ -92,7 +130,7 @@ defmodule Community.Members do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_profile(%Accounts.User{} = user, attrs \\ %{}) do
+  def create_profile(%User{} = user, attrs \\ %{}) do
     %Profile{}
     |> Profile.changeset(attrs)
     |> put_user(user)
@@ -142,7 +180,7 @@ defmodule Community.Members do
       %Ecto.Changeset{source: %Profile{}}
 
   """
-  def change_profile(%Accounts.User{} = user, %Profile{} = profile) do
+  def change_profile(%User{} = user, %Profile{} = profile) do
     profile
     |> Profile.changeset(%{})
     |> put_user(user)
