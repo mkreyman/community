@@ -5,7 +5,7 @@ defmodule Community.Members.Address do
   alias Community.Members.UserAddress
   alias Community.Accounts.User
 
-  @address_types [
+  @address_categories [
     "primary",
     "business",
     "mailing"
@@ -18,7 +18,7 @@ defmodule Community.Members.Address do
     field :postal_code, :string
     field :region, :string
     field :street_address, :string
-    field :address_type, :string
+    field :category, :string
 
     many_to_many :users, User, join_through: UserAddress
 
@@ -32,7 +32,7 @@ defmodule Community.Members.Address do
     :po_box,
     :postal_code,
     :street_address,
-    :address_type
+    :category
   ]
 
   @doc false
@@ -43,7 +43,7 @@ defmodule Community.Members.Address do
   end
 
   @doc false
-  def address_types() do
-    @address_types
+  def categories() do
+    @address_categories
   end
 end

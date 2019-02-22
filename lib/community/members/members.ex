@@ -15,16 +15,50 @@ defmodule Community.Members do
     |> preload_user()
   end
 
-  def get_user_addresses(%User{} = user) do
+  def get_user_addresses!(%User{} = user) do
     user
     |> Repo.preload(:addresses)
     |> Map.get(:addresses)
+  end
+
+  def get_user_addresses!(%User{} = user, id) do
+    user
+    |> Repo.preload(:addresses)
+    |> Map.get(:addresses)
+    |> Enum.filter(fn address -> address.id == id end)
+  end
+
+  defp user_addresses_query(query, %User{id: user_id}) do
+    from(a in query, where: a.user_id == ^user_id)
   end
 
   def add_user_to_address(%User{} = user, %Address{} = address) do
     %UserAddress{}
     |> UserAddress.changeset(%{user_id: user.id, address_id: address.id})
     |> Repo.insert()
+  end
+
+  def update_address(%Address{} = address, attrs) do
+    address
+    |> Address.changeset(attrs)
+    |> Repo.update()
+  end
+
+  def change_address(%User{} = user, %Address{} = address) do
+    address
+    |> Address.changeset(%{})
+    |> put_user(user)
+  end
+
+  def create_address(%User{} = user, attrs \\ %{}) do
+    %Address{}
+    |> Address.changeset(attrs)
+    |> put_user(user)
+    |> Repo.insert()
+  end
+
+  def delete_address(%Address{} = address) do
+    Repo.delete(address)
   end
 
   @doc """
@@ -40,6 +74,12 @@ defmodule Community.Members do
     Profile
     |> Repo.all()
     |> preload_user()
+  end
+
+  def list_alphabetical_profiles() do
+    Profile
+    |> Profile.alphabetical()
+    |> Repo.all()
   end
 
   def get_user_profile(%User{} = user) do

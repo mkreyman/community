@@ -9,7 +9,7 @@ defmodule Community.Repo.Migrations.CreateAddresses do
       add :po_box, :string
       add :postal_code, :string
       add :street_address, :string, null: false
-      add :address_type, :string
+      add :category, :string
 
       timestamps()
     end

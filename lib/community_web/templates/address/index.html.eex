@@ -1,0 +1,31 @@
+<h1>Listing Addresss</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Street Address</th>
+      <th>Locality / City</th>
+      <th>P.O. Box</th>
+      <th>Region / State</th>
+      <th>Postal Code</th>
+      <th>Country</th>
+      <th>Address Category</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for address <- @addresses do %>
+      <tr>
+        <td><%= address.street_address %></td>
+        <td><%= address.locality %></td>
+        <td><%= address.po_box %></td>
+        <td><%= address.region %></td>
+        <td><%= address.postal_code %></td>
+        <td><%= address.country %></td>
+        <td><%= address.category %></td>
+        <td><%= link "Show", to: Routes.address_path(@conn, :show, address) %></td>
+        <td><%= link "Edit", to: Routes.address_path(@conn, :edit, address) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

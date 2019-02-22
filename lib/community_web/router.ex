@@ -27,6 +27,7 @@ defmodule CommunityWeb.Router do
 
     pipe_through :authenticate_user
     resources "/profile", ProfileController, except: [:new, :create, :delete]
+    resources "/addresses", AddressController
   end
 
   # scope "/manage", CommunityWeb do

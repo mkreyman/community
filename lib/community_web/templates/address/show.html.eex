@@ -1,0 +1,43 @@
+<h1>Show Address</h1>
+
+<ul>
+
+  <li>
+    <strong>Street Address:</strong>
+    <%= @address.street_address %>
+  </li>
+
+  <li>
+    <strong>Locality / City:</strong>
+    <%= @address.locality %>
+  </li>
+
+  <li>
+    <strong>P.O. Box:</strong>
+    <%= @address.po_box %>
+  </li>
+
+  <li>
+    <strong>Region / State:</strong>
+    <%= @address.region %>
+  </li>
+
+  <li>
+    <strong>Postal Code:</strong>
+    <%= @address.postal_code %>
+  </li>
+
+  <li>
+    <strong>Country:</strong>
+    <%= @address.country %>
+  </li>
+
+  <li>
+    <strong>Address Category:</strong>
+    <%= @address.category %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.address_path(@conn, :edit, @address) %></span>
+<span><%= link "Back", to: Routes.address_path(@conn, :index) %></span>

@@ -1,6 +1,7 @@
 alias Community.{
   Repo,
-  Mailer
+  Mailer,
+  Contributions
 }
 
 alias Community.TaxReceipts.{
@@ -9,10 +10,7 @@ alias Community.TaxReceipts.{
 }
 
 alias Community.Router.Helpers, as: Routes
-
-alias Community.Contributions
-alias Community.Accounts
 alias Community.Contributions.Donor
-alias Community.Accounts.User
-alias Community.Accounts.Credential
+alias Community.{Accounts, Members}
+alias Community.Accounts.{User, Credential}
 alias Community.Members.{Profile, Address, UserAddress}

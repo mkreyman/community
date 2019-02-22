@@ -41,4 +41,10 @@ defmodule Community.Members.Profile do
     |> cast(attrs, @attrs)
     |> unique_constraint(:user_id)
   end
+
+  import Ecto.Query
+
+  def alphabetical(query) do
+    from p in query, order_by: p.family_name
+  end
 end

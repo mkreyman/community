@@ -1,0 +1,39 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <%= label f, :street_address %>
+  <%= text_input f, :street_address %>
+  <%= error_tag f, :street_address %>
+
+  <%= label f, :locality %>
+  <%= text_input f, :locality %>
+  <%= error_tag f, :locality %>
+
+  <%= label f, :po_box %>
+  <%= text_input f, :po_box %>
+  <%= error_tag f, :po_box %>
+
+  <%= label f, :region %>
+  <%= date_input f, :region %>
+  <%= error_tag f, :region %>
+
+  <%= label f, :postal_code %>
+  <%= text_input f, :postal_code %>
+  <%= error_tag f, :postal_code %>
+
+  <%= label f, :country %>
+  <%= text_input f, :country %>
+  <%= error_tag f, :country %>
+
+  <%= label f, :category %>
+  <%= select f, :category, category_select_options(@categories), prompt: "Choose a category" %>
+  <%= error_tag f, :category %>
+
+  <div>
+    <%= submit "Save" %>
+  </div>
+<% end %>
