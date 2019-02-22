@@ -5,6 +5,12 @@ defmodule Community.Members.Address do
   alias Community.Members.UserAddress
   alias Community.Accounts.User
 
+  @address_types [
+    "primary",
+    "business",
+    "mailing"
+  ]
+
   schema "addresses" do
     field :country, :string
     field :locality, :string
@@ -34,5 +40,10 @@ defmodule Community.Members.Address do
     address
     |> cast(attrs, @attrs)
     |> validate_required([:country, :locality, :street_address])
+  end
+
+  @doc false
+  def address_types() do
+    @address_types
   end
 end

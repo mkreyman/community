@@ -10,13 +10,9 @@ defmodule CommunityWeb.ProfileController do
   end
 
   def index(conn, _params, current_user) do
-    profile = Members.list_user_profile(current_user)
-
-    if profile do
-      render(conn, "index.html", profile: profile)
-    else
-      render_unauthorized(conn)
-    end
+    profile = Members.get_user_profile(current_user)
+    # render(conn, "index.html", profile: profile)
+    render(conn, "show.html", profile: profile)
   end
 
   def new(conn, _params, current_user) do
@@ -36,24 +32,19 @@ defmodule CommunityWeb.ProfileController do
     end
   end
 
-  def show(conn, %{"id" => id}, current_user) do
-    profile = Members.get_user_profile(current_user, id)
-
-    if profile do
-      render(conn, "show.html", profile: profile)
-    else
-      render_unauthorized(conn)
-    end
+  def show(conn, _params, current_user) do
+    profile = Members.get_user_profile(current_user)
+    render(conn, "show.html", profile: profile)
   end
 
-  def edit(conn, %{"id" => id}, current_user) do
-    profile = Members.get_user_profile(current_user, id)
+  def edit(conn, _params, current_user) do
+    profile = Members.get_user_profile(current_user)
     changeset = Members.change_profile(current_user, profile)
     render(conn, "edit.html", profile: profile, changeset: changeset)
   end
 
-  def update(conn, %{"id" => id, "profile" => profile_params}, current_user) do
-    profile = Members.get_user_profile(current_user, id)
+  def update(conn, %{"profile" => profile_params}, current_user) do
+    profile = Members.get_user_profile(current_user)
 
     case Members.update_profile(profile, profile_params) do
       {:ok, profile} ->
@@ -66,20 +57,12 @@ defmodule CommunityWeb.ProfileController do
     end
   end
 
-  def delete(conn, %{"id" => id}, current_user) do
-    profile = Members.get_user_profile(current_user, id)
+  def delete(conn, _params, current_user) do
+    profile = Members.get_user_profile(current_user)
     {:ok, _profile} = Members.delete_profile(profile)
 
     conn
     |> put_flash(:info, "Profile deleted successfully.")
     |> redirect(to: Routes.profile_path(conn, :index))
-  end
-
-  defp render_unauthorized(conn) do
-    conn
-    |> put_status(:unauthorized)
-    |> put_view(CommunityWeb.ErrorView)
-    |> render("401.html")
-    |> halt()
   end
 end

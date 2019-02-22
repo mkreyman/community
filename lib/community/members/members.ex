@@ -9,46 +9,22 @@ defmodule Community.Members do
   alias Community.Accounts.User
   # use Util.PipeDebug
 
-  def create_address(%User{} = user, attrs \\ %{}) do
-    with {:ok, address} <- %Address{} |> Address.changeset(attrs) |> Repo.insert() do
-      %UserAddress{}
-      |> UserAddress.changeset(%{user_id: user.id, address_id: address.id})
-      |> Repo.insert()
-    end
-  end
-
   def list_addresses() do
     Address
     |> Repo.all()
     |> preload_user()
   end
 
-  def list_user_addresses(%User{} = user) do
-    UserAddress
-    |> user_assoc_query(user)
-    |> Repo.all()
-    |> preload_address()
-    |> Enum.map(fn user_address -> user_address.address end)
-  end
-
-  def find_address(%Address{} = address) do
-    Address
-    |> address_query(address)
-    |> Repo.one()
+  def get_user_addresses(%User{} = user) do
+    user
+    |> Repo.preload(:addresses)
+    |> Map.get(:addresses)
   end
 
   def add_user_to_address(%User{} = user, %Address{} = address) do
     %UserAddress{}
     |> UserAddress.changeset(%{user_id: user.id, address_id: address.id})
     |> Repo.insert()
-  end
-
-  defp address_query(query, %Address{id: address_id}) do
-    from(a in query, where: a.id == ^address_id)
-  end
-
-  defp preload_address(assoc) do
-    Repo.preload(assoc, :address)
   end
 
   @doc """
@@ -66,32 +42,11 @@ defmodule Community.Members do
     |> preload_user()
   end
 
-  def list_user_profile(%User{} = user) do
-    profile =
-      Profile
-      |> user_assoc_query(user)
-      |> Repo.one()
-
-    case profile do
-      nil -> nil
-      profile -> preload_user(profile)
-    end
-  end
-
-  def get_user_profile(%User{} = user, id) do
-    profile =
-      from(p in Profile, where: p.id == ^id)
-      |> user_assoc_query(user)
-      |> Repo.one()
-
-    case profile do
-      nil -> nil
-      profile -> preload_user(profile)
-    end
-  end
-
-  defp user_assoc_query(query, %User{id: user_id}) do
-    from(a in query, where: a.user_id == ^user_id)
+  def get_user_profile(%User{} = user) do
+    user
+    |> Repo.preload(:profile)
+    |> Map.get(:profile)
+    |> preload_user()
   end
 
   @doc """
@@ -112,10 +67,6 @@ defmodule Community.Members do
 
   defp preload_user(assoc) do
     Repo.preload(assoc, :user)
-  end
-
-  defp preload_users(assoc) do
-    Repo.preload(assoc, :users)
   end
 
   @doc """

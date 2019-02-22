@@ -10,8 +10,9 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
-# alias Community.Repo
+alias Community.Repo
 alias Community.{Accounts, Members}
+alias Community.Members.Address
 # use Util.PipeDebug
 
 user1_params = %{
@@ -96,12 +97,22 @@ user3_address = %{
 Members.update_profile(user1.profile, user1_profile)
 Members.update_profile(user2.profile, user2_profile)
 
-Members.create_address(user1, user1_address)
-Members.create_address(user2, user2_address)
-Members.create_address(user3, user3_address)
+address1 =
+  %Address{}
+  |> Address.changeset(user1_address)
+  |> Repo.insert!()
 
 address2 =
-  Members.list_user_addresses(user2)
-  |> List.first()
+  %Address{}
+  |> Address.changeset(user2_address)
+  |> Repo.insert!()
 
+address3 =
+  %Address{}
+  |> Address.changeset(user3_address)
+  |> Repo.insert!()
+
+Members.add_user_to_address(user1, address1)
+Members.add_user_to_address(user2, address2)
+Members.add_user_to_address(user3, address3)
 Members.add_user_to_address(user1, address2)
