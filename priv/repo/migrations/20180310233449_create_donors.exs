@@ -4,7 +4,7 @@ defmodule Congregation.Repo.Migrations.CreateDonors do
   def change do
     create table(:donors) do
       add :name, :string
-      add :amount, :integer
+      add :amount, :float, precision: 10, scale: 2
       add :address, :string
       add :email, :string
       add :phone, :string
