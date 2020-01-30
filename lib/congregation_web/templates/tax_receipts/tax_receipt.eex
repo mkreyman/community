@@ -7,7 +7,7 @@
 	<META NAME="AUTHOR" CONTENT="mark@kreyman.com">
 	<META NAME="CREATED" CONTENT="20170128;23320000">
 	<META NAME="CHANGEDBY" CONTENT="Bethel Community ">
-	<META NAME="CHANGED" CONTENT="20180127;19121480">
+	<META NAME="CHANGED" CONTENT="20190129;18491480">
 	<META NAME="AppVersion" CONTENT="15.0000">
 	<META NAME="DocSecurity" CONTENT="0">
 	<META NAME="HyperlinksChanged" CONTENT="false">
@@ -35,7 +35,7 @@
 </P>
 <P STYLE="margin-bottom: 0in"><B>CONTRIBUTION SUMMARY</B></P>
 <P STYLE="margin-bottom: 0in"><B><SPAN LANG="ru-RU">January through
-December 2018</SPAN></B></P>
+December 2019</SPAN></B></P>
 <P STYLE="margin-bottom: 0in"><BR>
 </P>
 <P STYLE="margin-bottom: 0in"><B><%= donor.name %></B></P>
@@ -45,7 +45,7 @@ December 2018</SPAN></B></P>
 <P STYLE="margin-bottom: 0in">Thank you for your
 sacrifice and faithfulness!</P>
 <P STYLE="margin-bottom: 0in"><SPAN LANG="ru-RU">For income tax
-purposes, your total 2018</SPAN><SPAN LANG="ru-RU">
+purposes, your total 2019</SPAN><SPAN LANG="ru-RU">
 tax-deductible* contribution was:</SPAN></P>
 
 <P ALIGN=CENTER STYLE="margin-bottom: 0in">$<%= donor.amount %></P>

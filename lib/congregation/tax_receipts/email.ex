@@ -4,10 +4,10 @@ defmodule Congregation.TaxReceipts.Email do
 
   @from_address Application.get_env(:congregation, :from_address)
   @attachment_dir Application.get_env(:congregation, :tax_receipts_output_dir)
-  @thank_you_letter Path.join(
-                      @attachment_dir,
-                      Application.get_env(:congregation, :thank_you_letter)
-                    )
+  # @thank_you_letter Path.join(
+  #                     @attachment_dir,
+  #                     Application.get_env(:congregation, :thank_you_letter)
+  #                   )
 
   def send(with_filter \\ :with_email_only) do
     Donor.filtered(with_filter)
@@ -32,11 +32,9 @@ defmodule Congregation.TaxReceipts.Email do
   defp tax_receipt_email(donor) do
     receipt = Path.join(@attachment_dir, "/#{donor.name}.pdf")
 
-    text_body =
-      "\nPlease see attached.\n\nThank you!\nBethel Community"
+    text_body = "\nPlease see attached.\n\nThank you!\nBethel Community"
 
-    html_body =
-      "<p>Please see attached.</p>\n<p>Thank you!\n<br>Bethel Community</p>\n"
+    html_body = "<p>Please see attached.</p>\n<p>Thank you!\n<br>Bethel Community</p>\n"
 
     new_email(
       from: @from_address,
@@ -46,7 +44,8 @@ defmodule Congregation.TaxReceipts.Email do
       html_body: html_body
     )
     |> put_attachment(receipt)
-    |> put_attachment(@thank_you_letter)
+
+    # |> put_attachment(@thank_you_letter)
   end
 
   defp toggle_receipt_emailed(donor) do
