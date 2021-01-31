@@ -70,8 +70,8 @@ config :phoenix, :plug_init_mode, :runtime
 config :congregation, Congregation.Repo,
   adapter: Ecto.Adapters.Postgres,
   database: "congregation_#{Mix.env()}",
-  username: System.get_env("DB_USER"),
-  password: System.get_env("DB_PASSWORD"),
+  username: System.get_env("PG_DB_USER"),
+  password: System.get_env("PG_DB_PASSWORD"),
   hostname: "localhost",
   pool_size: 10
 

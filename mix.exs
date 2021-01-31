@@ -5,7 +5,8 @@ defmodule Congregation.MixProject do
     [
       app: :congregation,
       version: "0.1.0",
-      elixir: "~> 1.9.1",
+      # elixir: "~> 1.9.1",
+      elixir: "1.10.2",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
@@ -33,8 +34,8 @@ defmodule Congregation.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.4.0"},
-      {:phoenix_pubsub, "~> 1.1"},
+      {:phoenix, "~> 1.5.3"},
+      {:phoenix_pubsub, "~> 2.0"},
       {:phoenix_ecto, "~> 4.0"},
       {:ecto_sql, "~> 3.0"},
       {:postgrex, "~> 0.14.0"},
@@ -44,8 +45,9 @@ defmodule Congregation.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:csv, "~> 2.0.0"},
-      {:pdf_generator, ">=0.3.5"},
-      {:bamboo, "~> 1.1"}
+      # {:pdf_generator, ">=0.3.5"},
+      { :pdf_generator, ">=0.6.2", compile: "make chrome" },
+      {:bamboo, "~> 1.6"}
     ]
   end
 

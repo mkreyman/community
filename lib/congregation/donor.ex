@@ -79,7 +79,7 @@ defmodule Congregation.Donor do
     |> current_donors()
     |> with_email()
     |> have_not_been_emailed()
-    # |> on_the_list(["Test Donor"])
+    # |> on_the_list(["Test User"])
     |> Repo.all()
   end
 

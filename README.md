@@ -6,12 +6,13 @@ Generate tax receipts for our donors based on QuickBooks reports in CSV format, 
 
 ## How to use
 
-Place your template in `templates` directory.
-Adjust configuration in `config.exs`.
+Place your template in `lib/congregation_web/templates/tax_receipts/` directory.
+Adjust configuration in `config/config.exs`.
 
 ```elixir
+iex -S mix
 # path relative to lib/congregation/tax_receipts/print.ex
-csv = "../../../tmp/Donations-by-Member-2019.csv"
+csv = "../../../tmp/Donations-by-Member-2020.csv"
 
 # should be no headers row in the csv file.
 headers = [:name, :amount, :address, :email]
@@ -43,6 +44,7 @@ Processor.parse(csv, headers)
 
 Donor.summary("smith")
 Donor.update(%{name: "John Smith", email: "jsmith@gmail.com", receipt_emailed: nil})
+
 Donor.filtered(:with_email)
 Processor.print(:with_email)
 Email.send(:with_email)
@@ -51,7 +53,7 @@ Donor.create_or_update(%{amount: 100, email: "jane.smith@gmail.com", name: "Jane
 donor = Repo.get(Donor, 104)
 Repo.delete(donor)
 
-psql -U svcdgccodev -d congregation_dev -c "Cy (Select * From donors LIMIT 2000) To STDOUT With CSV HEADER DELIMITER ',';" > ~/donors_data.csv
+psql -U mkreyman -d congregation_dev -c "Cy (Select * From donors LIMIT 2000) To STDOUT With CSV HEADER DELIMITER ',';" > ~/donors_data.csv
 
 # Updating donor's name
 donor = Repo.get(Donor, 400)
@@ -92,13 +94,19 @@ https://github.com/gutschilla/elixir-pdf-generator
 Install dependancies:
 
 ```
-brew install Caskroom/cask/wkhtmltopdf
+brew install wkhtmltopdf
+brew install postgres
+pg_ctl -D /usr/local/var/postgres start
 ```
 
 Download `goon` from https://github.com/alco/goon/releases/ and place it into `~/bin`
 
 ```elixir
 mix deps.get
+mix ecto.drop
+mix ecto.create
+mix ecto.migrate
+iex -S mix
 ```
 
 An example of using EEx templates:

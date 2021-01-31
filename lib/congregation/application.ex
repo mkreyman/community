@@ -5,9 +5,12 @@ defmodule Congregation.Application do
 
   use Application
 
+  {Phoenix.PubSub, [name: Congregation.PubSub, adapter: Phoenix.PubSub.PG2]}
+
   def start(_type, _args) do
     # List all child processes to be supervised
     children = [
+      {DynamicSupervisor, strategy: :one_for_one, name: Congregation.DynamicSupervisor},
       # Start the Ecto repository
       Congregation.Repo,
       # Start the endpoint when the application starts
@@ -18,8 +21,7 @@ defmodule Congregation.Application do
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: Congregation.Supervisor]
-    Supervisor.start_link(children, opts)
+    Supervisor.start_link(children, strategy: :one_for_one)
   end
 
   # Tell Phoenix to update the endpoint configuration

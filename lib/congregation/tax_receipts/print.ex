@@ -6,8 +6,8 @@ defmodule Congregation.TaxReceipts.Processor do
   @output_dir Application.get_env(:congregation, :tax_receipts_output_dir)
   @templates_dir Application.get_env(:congregation, :tax_receipts_templates_dir)
   @template Application.get_env(:congregation, :tax_receipts_template)
-  @logo Application.get_env(:congregation, :tax_receipts_logo)
-  @tmp_dir Application.get_env(:congregation, :tax_receipts_tmp_dir)
+  # @logo Application.get_env(:congregation, :tax_receipts_logo)
+  # @tmp_dir Application.get_env(:congregation, :tax_receipts_tmp_dir)
   @pdf_options Application.fetch_env!(:pdf_generator, :pdf_options)
 
   # The Sales by Customer Summary report: "../tmp/Sales by Customer Summary 2017.CSV"
@@ -26,7 +26,7 @@ defmodule Congregation.TaxReceipts.Processor do
   end
 
   def print(with_filter \\ nil) do
-    copy_logo_to_tmp_dir()
+    # copy_logo_to_tmp_dir()
 
     Donor.filtered(with_filter)
     |> Enum.map(&to_pdf(&1))
@@ -58,7 +58,7 @@ defmodule Congregation.TaxReceipts.Processor do
     EEx.eval_file("#{@templates_dir}/#{@template}", donor: donor)
   end
 
-  defp copy_logo_to_tmp_dir do
-    File.cp("#{@templates_dir}/#{@logo}", "#{@tmp_dir}/#{@logo}")
-  end
+  # defp copy_logo_to_tmp_dir do
+  #   File.cp("#{@templates_dir}/#{@logo}", "#{@tmp_dir}/#{@logo}")
+  # end
 end
