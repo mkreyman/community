@@ -1,7 +1,7 @@
 defmodule Congregation.Donor do
   use Ecto.Schema
   import Ecto.Changeset
-  import Ecto.Query
+  import Ecto.Query, warn: false
 
   alias Congregation.{Repo, Donor}
   alias Ecto.Query
@@ -16,8 +16,6 @@ defmodule Congregation.Donor do
 
     timestamps()
   end
-
-  @failed ["Test Donor"]
 
   @fields ~w(name amount address email phone receipt_emailed)a
 
@@ -40,6 +38,10 @@ defmodule Congregation.Donor do
       receipt_emailed: receipt_emailed
     })
     |> Repo.insert!()
+  end
+
+  def get_by(donor_name) when is_binary(donor_name) do
+    Repo.get_by(Donor, name: donor_name)
   end
 
   def create_or_update(params) do
@@ -131,9 +133,12 @@ defmodule Congregation.Donor do
     |> Repo.all()
   end
 
-  def update_status() do
-    @failed
-    |> Enum.each(&update(%{name: &1, receipt_emailed: nil}))
+  def update_status(filter, receipt_emailed)
+      when is_atom(filter) and is_boolean(receipt_emailed) do
+    filter
+    |> filtered()
+    |> Enum.map(& &1.name)
+    |> Enum.each(&update(%{name: &1, receipt_emailed: receipt_emailed}))
   end
 
   def reset_status(donor) do

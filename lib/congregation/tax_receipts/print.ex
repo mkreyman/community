@@ -6,12 +6,7 @@ defmodule Congregation.TaxReceipts.Processor do
   @output_dir Application.get_env(:congregation, :tax_receipts_output_dir)
   @templates_dir Application.get_env(:congregation, :tax_receipts_templates_dir)
   @template Application.get_env(:congregation, :tax_receipts_template)
-  # @logo Application.get_env(:congregation, :tax_receipts_logo)
-  # @tmp_dir Application.get_env(:congregation, :tax_receipts_tmp_dir)
-  @pdf_options Application.fetch_env!(:pdf_generator, :pdf_options)
 
-  # The Sales by Customer Summary report: "../tmp/Sales by Customer Summary 2017.CSV"
-  # The Customer Contact List report: "../tmp/Customer Contact List from QuickBooks.CSV"
   def parse(csv, headers) do
     csv
     |> Path.expand(__DIR__)
@@ -25,9 +20,17 @@ defmodule Congregation.TaxReceipts.Processor do
     end)
   end
 
-  def print(with_filter \\ nil) do
-    # copy_logo_to_tmp_dir()
+  def print(with_filter \\ nil)
 
+  def print(donor_name) when is_binary(donor_name) do
+    with donor when not is_nil(donor) <- Donor.get_by(donor_name) do
+      donor
+      |> IO.inspect()
+      |> to_pdf()
+    end
+  end
+
+  def print(with_filter) do
     Donor.filtered(with_filter)
     |> Enum.map(&to_pdf(&1))
   end
@@ -40,9 +43,9 @@ defmodule Congregation.TaxReceipts.Processor do
     with {:ok, file} <-
            PdfGenerator.generate(
              html,
-             shell_params: @pdf_options,
              delete_temporary: true,
-             filename: filename
+             filename: filename,
+             page_size: "letter"
            ) do
       File.rename(file, renamed)
       {:ok, renamed}
@@ -57,8 +60,4 @@ defmodule Congregation.TaxReceipts.Processor do
   defp eval_template(donor) do
     EEx.eval_file("#{@templates_dir}/#{@template}", donor: donor)
   end
-
-  # defp copy_logo_to_tmp_dir do
-  #   File.cp("#{@templates_dir}/#{@logo}", "#{@tmp_dir}/#{@logo}")
-  # end
 end

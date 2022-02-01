@@ -10,9 +10,17 @@ Place your template in `lib/congregation_web/templates/tax_receipts/` directory.
 Adjust configuration in `config/config.exs`.
 
 ```elixir
+mix local.rebar
+rm -rf deps
+rm -rf _build
+mix deps.get
+mix deps.compile
+mix ecto.create
+mix ecto.migrate
+
 iex -S mix
 # path relative to lib/congregation/tax_receipts/print.ex
-csv = "../../../tmp/Donations-by-Member-2020.csv"
+csv = "../../../tmp/Donations by Member Summary 2021.csv"
 
 # should be no headers row in the csv file.
 headers = [:name, :amount, :address, :email]
@@ -31,7 +39,8 @@ Donor.filtered(:current) |> Enum.count
 Donor |> Repo.all |> Enum.count
 Donor.filtered(:with_email) |> Enum.count
 
-Donor.update_status() ?
+# Sets `receipt_emails: true` for all records with email address present
+Donor.update_status(:with_email, true)
 
 headers = [:email, :name, :address]
 csv = "../../../tmp/subs_cleaned_for_import.csv"

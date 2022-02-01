@@ -13,7 +13,7 @@ config :congregation,
 # Configures the endpoint
 config :congregation, CongregationWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "pdFC4H/FS/ZzEbDL6HTz+jwLAZGDMaxXGItjtF6ZjSs4t6BiHlSzCfB7G5Nz7ZKD",
+  secret_key_base: System.get_env("TAX_RECEIPTS_SECRET"),,
   render_errors: [view: CongregationWeb.ErrorView, accepts: ~w(html json)],
   pubsub_server: Congregation.PubSub
 
@@ -25,48 +25,11 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
-# configuration for the PdfGenerator
-# config :pdf_generator,
-#   pdf_options: [
-#     "--print-media-type",
-#     "--page-size",
-#     "Letter",
-#     "--dpi",
-#     "150",
-#     "--zoom",
-#     "3",
-#     "--margin-top",
-#     "8",
-#     "--margin-right",
-#     "8",
-#     "--margin-bottom",
-#     "8",
-#     "--margin-left",
-#     "8"
-#   ]
-
-config :pdf_generator,
-  pdf_options: [
-    "--print-media-type",
-    "--page-size",
-    "A4",
-    "--dpi",
-    "150",
-    "--margin-top",
-    "8",
-    "--margin-right",
-    "8",
-    "--margin-bottom",
-    "8",
-    "--margin-left",
-    "8"
-  ]
-
 config :congregation,
   tax_receipts_output_dir: "output",
   tax_receipts_templates_dir: "lib/congregation_web/templates/tax_receipts",
   tax_receipts_template: "tax_receipt.eex",
-  tax_receipts_logo: "https://bethelrussianchurch.org/wp-content/uploads/2021/01/logo.png",
+  tax_receipts_logo: System.get_env("TAX_RECEIPTS_LOGO_URL"),
   thank_you_letter: "Letter from pastors 2020.pdf",
   from_address: System.get_env("SENDGRID_FROM_ADDRESS") || "test@example.com",
   # don't change, as it's hardcoded in PdfGenerator

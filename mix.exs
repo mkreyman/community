@@ -4,9 +4,8 @@ defmodule Congregation.MixProject do
   def project do
     [
       app: :congregation,
-      version: "0.1.0",
-      # elixir: "~> 1.9.1",
-      elixir: "1.10.2",
+      version: "0.1.1",
+      elixir: "1.11.2",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
@@ -34,20 +33,19 @@ defmodule Congregation.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.5.3"},
+      {:phoenix, "~> 1.6"},
       {:phoenix_pubsub, "~> 2.0"},
-      {:phoenix_ecto, "~> 4.0"},
-      {:ecto_sql, "~> 3.0"},
-      {:postgrex, "~> 0.14.0"},
-      {:phoenix_html, "~> 2.11"},
-      {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:gettext, "~> 0.11"},
-      {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"},
-      {:csv, "~> 2.0.0"},
-      # {:pdf_generator, ">=0.3.5"},
-      { :pdf_generator, ">=0.6.2", compile: "make chrome" },
-      {:bamboo, "~> 1.6"}
+      {:phoenix_ecto, "~> 4.4"},
+      {:ecto_sql, "~> 3.7"},
+      {:postgrex, "~> 0.16.1"},
+      {:phoenix_html, "~> 3.2"},
+      {:phoenix_live_reload, "~> 1.3", only: :dev},
+      {:gettext, "~> 0.19"},
+      {:jason, "~> 1.3"},
+      {:plug_cowboy, "~> 2.5"},
+      {:csv, "~> 2.4"},
+      {:pdf_generator, ">=0.6.2"},
+      {:bamboo, "~> 2.2"}
     ]
   end
 

@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <HTML>
+
 <HEAD>
 	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
 	<TITLE></TITLE>
 	<META NAME="GENERATOR" CONTENT="OpenOffice 4.1.4  (Unix)">
-	<META NAME="AUTHOR" CONTENT="mark@kreyman.com">
+	<META NAME="AUTHOR" CONTENT="mark@bethel.community">
 	<META NAME="CREATED" CONTENT="20170128;23320000">
 	<META NAME="CHANGEDBY" CONTENT="Bethel Community ">
-	<META NAME="CHANGED" CONTENT="20200130;18491480">
+	<META NAME="CHANGED" CONTENT="20220130;19121480">
 	<META NAME="AppVersion" CONTENT="15.0000">
 	<META NAME="DocSecurity" CONTENT="0">
 	<META NAME="HyperlinksChanged" CONTENT="false">
@@ -15,58 +16,100 @@
 	<META NAME="ScaleCrop" CONTENT="false">
 	<META NAME="ShareDoc" CONTENT="false">
 	<STYLE TYPE="text/css">
-	<!--
-		@page { margin: 1in }
-		P { margin-bottom: 0.08in; direction: ltr; color: #000000; widows: 2; orphans: 2 }
-	-->
+		<!--
+		@page {
+			margin: 1in
+		}
+
+		P {
+			margin-bottom: 0.08in;
+			direction: ltr;
+			color: #000000;
+			widows: 2;
+			orphans: 2
+		}
+		-->
 	</STYLE>
 </HEAD>
+
 <BODY LANG="en-US" TEXT="#000000" DIR="LTR">
-<P STYLE="margin-bottom: 0in; line-height: 100%">
-<IMG SRC="https://bethelrussianchurch.org/wp-content/uploads/2021/01/logo.png" ALIGN=LEFT HSPACE=16 WIDTH=343 HEIGHT=125 BORDER=0>
-      <FONT SIZE=4 STYLE="font-size: 16pt">Bethel Community</FONT></br>
-      <P STYLE="margin-bottom: 0in; line-height: 100%"><FONT SIZE=2>
-	  <FONT SIZE=2>13231 E Mississippi Ave,</FONT></br>
-      <FONT SIZE=2>Aurora, CO 80012</FONT></br>
-      303.536.5353</FONT></br>
-     <FONT SIZE=2>www.bethel.community</FONT></P>
-<P STYLE="margin-bottom: 0in"><BR>
-</P>
-<P STYLE="margin-bottom: 0in"><BR>
-</P>
-<P STYLE="margin-bottom: 0in"><B>CONTRIBUTION SUMMARY</B></P>
-<P STYLE="margin-bottom: 0in"><B><SPAN LANG="ru-RU">January through
-December 2020</SPAN></B></P>
-<P STYLE="margin-bottom: 0in"><BR>
-</P>
-<P STYLE="margin-bottom: 0in"><B><%= donor.name %></B></P>
-<P STYLE="margin-bottom: 0in"><B><%= donor.address || donor.email || "no address on file"%></B></P>
-<P STYLE="margin-bottom: 0in"><BR>
-</P>
-<P STYLE="margin-bottom: 0in">Thank you for your
-sacrifice and faithfulness!</P>
-<P STYLE="margin-bottom: 0in"><SPAN LANG="ru-RU">For income tax
-purposes, your total 2020</SPAN><SPAN LANG="ru-RU">
-tax-deductible* contribution was:</SPAN></P>
+	<P STYLE="margin-bottom: 0in; line-height: 100%"><IMG
+			SRC="https://bethelrussianchurch.org/wp-content/uploads/2021/01/logo.png" NAME="graphics1" ALIGN=LEFT
+			HSPACE=16 WIDTH=343 HEIGHT=125 BORDER=0>
+		<FONT SIZE=4 STYLE="font-size: 16pt">Bethel Community</FONT></br>
+		<P STYLE="margin-bottom: 0in; line-height: 100%">
+			<FONT SIZE=2>
+				<FONT SIZE=2>13231 E Mississippi Ave,</FONT></br>
+				<FONT SIZE=2>Aurora, CO 80012</FONT></br>
+				303.536.5353
+			</FONT></br>
+			<FONT SIZE=2>www.bethel.community</FONT>
+		</P>
+		<P STYLE="margin-bottom: 0in"><BR>
+		</P>
+		<P STYLE="margin-bottom: 0in"><BR>
+		</P>
+		<P STYLE="margin-bottom: 0in"><B>CONTRIBUTION SUMMARY</B></P>
+		<P STYLE="margin-bottom: 0in"><B><SPAN LANG="ru-RU">January through
+					December 2021</SPAN></B></P>
+		<P STYLE="margin-bottom: 0in"><BR>
+		</P>
+		<P STYLE="margin-bottom: 0in"><B><%= donor.name %></B></P>
+		<P STYLE="margin-bottom: 0in"><B><%= donor.address %></B></P>
+		<P STYLE="margin-bottom: 0in"><BR>
+		</P>
+		<P STYLE="margin-bottom: 0in">Thank you for your
+			sacrifice and faithfulness!</P>
+		<P STYLE="margin-bottom: 0in"><SPAN LANG="ru-RU">For income tax
+				purposes, your total 2021</SPAN><SPAN LANG="ru-RU">
+				tax-deductible* contribution was:</SPAN></P>
 
-<P STYLE="margin-bottom: 0in"><BR>
-</P>
+		<P ALIGN=CENTER STYLE="margin-bottom: 0in">$<%= donor.amount %></P>
 
-<P ALIGN=CENTER STYLE="margin-bottom: 0in">$<%= donor.amount %></P>
-
-<P STYLE="margin-bottom: 0in"><BR>
-</P>
-
-<P STYLE="margin-bottom: 0in">Please keep this written
-acknowledgment for your tax records.</P>
-<P STYLE="margin-bottom: 0in"><BR>
-</P>
-<P STYLE="margin-bottom: 0in"><BR>
-</P>
-
-<P STYLE="margin-bottom: 0in"><FONT SIZE=2 STYLE="font-size: 9pt">*These
-contributions are tax deductible in the USA. We verify as a
-requirement of the 1993 Revenue Reconciliation Act that no goods or
-services of value were or will be given to you for this contribution.</FONT></P>
+		<P STYLE="margin-bottom: 0in">Please keep this written
+			acknowledgment for your tax records.</P>
+		<P STYLE="margin-bottom: 0in"><BR>
+		</P>
+		<P STYLE="margin-bottom: 0in"><BR>
+		</P>
+		<P STYLE="margin-bottom: 0in"><BR>
+		</P>
+		<P STYLE="margin-bottom: 0in"><BR>
+		</P>
+		<P STYLE="margin-bottom: 0in"><BR>
+		</P>
+		<P STYLE="margin-bottom: 0in"><BR>
+		</P>
+		<P STYLE="margin-bottom: 0in"><BR>
+		</P>
+		<P STYLE="margin-bottom: 0in"><BR>
+		</P>
+		<P STYLE="margin-bottom: 0in"><BR>
+		</P>
+		<P STYLE="margin-bottom: 0in"><BR>
+		</P>
+		<P STYLE="margin-bottom: 0in"><BR>
+		</P>
+		<P STYLE="margin-bottom: 0in"><BR>
+		</P>
+		<P STYLE="margin-bottom: 0in"><BR>
+		</P>
+		<P STYLE="margin-bottom: 0in"><BR>
+		</P>
+		<P STYLE="margin-bottom: 0in"><BR>
+		</P>
+		<P STYLE="margin-bottom: 0in"><BR>
+		</P>
+		<P STYLE="margin-bottom: 0in"><BR>
+		</P>
+		<P STYLE="margin-bottom: 0in"><BR>
+		</P>
+		<P STYLE="margin-bottom: 0in">
+			<FONT SIZE=2 STYLE="font-size: 9pt">*These
+				contributions are tax deductible in the USA. We verify as a
+				requirement of the 1993 Revenue Reconciliation Act that no goods or
+				services of value were or will be given to you for this contribution.</FONT>
+		</P>
 </BODY>
+
 </HTML>

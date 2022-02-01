@@ -4,17 +4,30 @@ defmodule Congregation.TaxReceipts.Email do
 
   @from_address Application.get_env(:congregation, :from_address)
   @attachment_dir Application.get_env(:congregation, :tax_receipts_output_dir)
+
   # @thank_you_letter Path.join(
   #                     @attachment_dir,
   #                     Application.get_env(:congregation, :thank_you_letter)
   #                   )
 
-  def send(with_filter \\ :with_email_only) do
+  def send(with_filter \\ :with_email_only)
+
+  def send(donor_name) when is_binary(donor_name) do
+    with donor when not is_nil(donor) <- Donor.get_by(donor_name) do
+      donor
+      |> IO.inspect()
+      |> to_email()
+    end
+  end
+
+  def send(with_filter) when is_atom(with_filter) do
     Donor.filtered(with_filter)
     |> Enum.map(fn donor ->
       to_email(donor)
       :timer.sleep(Enum.random(1000..15000))
     end)
+
+    :ok
   end
 
   defp to_email(donor) do
