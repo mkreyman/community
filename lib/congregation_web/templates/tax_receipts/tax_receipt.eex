@@ -51,7 +51,7 @@
 		</P>
 		<P STYLE="margin-bottom: 0in"><B>CONTRIBUTION SUMMARY</B></P>
 		<P STYLE="margin-bottom: 0in"><B><SPAN LANG="ru-RU">January through
-					December 2021</SPAN></B></P>
+					December 2022</SPAN></B></P>
 		<P STYLE="margin-bottom: 0in"><BR>
 		</P>
 		<P STYLE="margin-bottom: 0in"><B><%= donor.name %></B></P>
@@ -61,7 +61,7 @@
 		<P STYLE="margin-bottom: 0in">Thank you for your
 			sacrifice and faithfulness!</P>
 		<P STYLE="margin-bottom: 0in"><SPAN LANG="ru-RU">For income tax
-				purposes, your total 2021</SPAN><SPAN LANG="ru-RU">
+				purposes, your total 2022</SPAN><SPAN LANG="ru-RU">
 				tax-deductible* contribution was:</SPAN></P>
 
 		<P ALIGN=CENTER STYLE="margin-bottom: 0in">$<%= donor.amount %></P>

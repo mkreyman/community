@@ -20,7 +20,7 @@ mix ecto.migrate
 
 iex -S mix
 # path relative to lib/congregation/tax_receipts/print.ex
-csv = "../../../tmp/Donations by Member Summary 2021.csv"
+csv = "../../../tmp/Donations by Member Summary 2022.csv"
 
 # should be no headers row in the csv file.
 headers = [:name, :amount, :address, :email]
@@ -31,7 +31,8 @@ Processor.print(:current) // where amount is not nil
 ## More examples
 
 Processor.print(:with_address_and_email)
-Processor.print(:current) // amount > 0
+Processor.print("John Doe")
+
 Email.send(:with_email_only)
 
 Donor.filtered(:zero) |> Enum.count
