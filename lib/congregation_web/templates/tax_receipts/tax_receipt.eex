@@ -34,8 +34,8 @@
 
 <BODY LANG="en-US" TEXT="#000000" DIR="LTR">
 	<P STYLE="margin-bottom: 0in; line-height: 100%"><IMG
-			SRC="https://bethelrussianchurch.org/wp-content/uploads/2021/01/logo.png" NAME="graphics1" ALIGN=LEFT
-			HSPACE=16 WIDTH=343 HEIGHT=125 BORDER=0>
+			SRC="https://bethel.community/wp-content/uploads/2024/01/qr-and-words.jpg" NAME="graphics1" ALIGN=LEFT
+			HSPACE=16 WIDTH=160 HEIGHT=120 BORDER=0>
 		<FONT SIZE=4 STYLE="font-size: 16pt">Bethel Community</FONT></br>
 		<P STYLE="margin-bottom: 0in; line-height: 100%">
 			<FONT SIZE=2>
@@ -51,7 +51,7 @@
 		</P>
 		<P STYLE="margin-bottom: 0in"><B>CONTRIBUTION SUMMARY</B></P>
 		<P STYLE="margin-bottom: 0in"><B><SPAN LANG="ru-RU">January through
-					December 2022</SPAN></B></P>
+					December 2023</SPAN></B></P>
 		<P STYLE="margin-bottom: 0in"><BR>
 		</P>
 		<P STYLE="margin-bottom: 0in"><B><%= donor.name %></B></P>
@@ -61,7 +61,7 @@
 		<P STYLE="margin-bottom: 0in">Thank you for your
 			sacrifice and faithfulness!</P>
 		<P STYLE="margin-bottom: 0in"><SPAN LANG="ru-RU">For income tax
-				purposes, your total 2022</SPAN><SPAN LANG="ru-RU">
+				purposes, your total 2023</SPAN><SPAN LANG="ru-RU">
 				tax-deductible* contribution was:</SPAN></P>
 
 		<P ALIGN=CENTER STYLE="margin-bottom: 0in">$<%= donor.amount %></P>

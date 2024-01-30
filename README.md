@@ -63,6 +63,14 @@ Donor.create_or_update(%{amount: 100, email: "jane.smith@gmail.com", name: "Jane
 donor = Repo.get(Donor, 104)
 Repo.delete(donor)
 
+# Reset donation amount to zero for all donors
+Repo.update_all(Donor, set: [amount: 0])
+
+# Reset receipts, so you could send again
+import Ecto.Query
+query = from(d in Donor, where: d.amount > 0, select: d)
+Repo.update_all(query, set: [receipt_emailed: nil])
+
 psql -U mkreyman -d congregation_dev -c "Cy (Select * From donors LIMIT 2000) To STDOUT With CSV HEADER DELIMITER ',';" > ~/donors_data.csv
 
 # Updating donor's name
