@@ -20,7 +20,7 @@ mix ecto.migrate
 
 iex -S mix
 # path relative to lib/congregation/tax_receipts/print.ex
-csv = "../../../tmp/Donations by Member Summary 2022.csv"
+csv = "../../../tmp/2024 Donations by Member Summary.csv"
 
 # should be no headers row in the csv file.
 headers = [:name, :amount, :address, :email]
