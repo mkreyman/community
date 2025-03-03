@@ -13,7 +13,7 @@ config :congregation,
 # Configures the endpoint
 config :congregation, CongregationWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: System.get_env("TAX_RECEIPTS_SECRET"),,
+  secret_key_base: System.get_env("TAX_RECEIPTS_SECRET"),
   render_errors: [view: CongregationWeb.ErrorView, accepts: ~w(html json)],
   pubsub_server: Congregation.PubSub
 
