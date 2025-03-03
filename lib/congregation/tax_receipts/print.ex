@@ -14,8 +14,15 @@ defmodule Congregation.TaxReceipts.Processor do
     |> CSV.decode(headers: headers, strip_fields: true)
     |> Enum.map(fn {status, record} ->
       case status do
-        :ok -> Donor.create_or_update(record)
-        _ -> {:error, record}
+        :ok ->
+          record_with_trimmed_name =
+            record
+            |> Map.update!(:name, &String.trim/1)
+
+          Donor.create_or_update(record_with_trimmed_name)
+
+        _ ->
+          {:error, record}
       end
     end)
   end
@@ -32,7 +39,11 @@ defmodule Congregation.TaxReceipts.Processor do
 
   def print(with_filter) do
     Donor.filtered(with_filter)
-    |> Enum.map(&to_pdf(&1))
+    |> Task.async_stream(&to_pdf/1,
+      max_concurrency: System.schedulers_online() * 2,
+      timeout: 30_000
+    )
+    |> Enum.to_list()
   end
 
   defp to_pdf(donor) do
