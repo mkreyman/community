@@ -20,7 +20,7 @@ mix ecto.migrate
 
 iex -S mix
 # path relative to lib/congregation/tax_receipts/print.ex
-csv = "../../../tmp/Donations by Member Summary 2021.csv"
+csv = "../../../tmp/2024 Donations by Member Summary.csv"
 
 # should be no headers row in the csv file.
 headers = [:name, :amount, :address, :email]
@@ -31,7 +31,8 @@ Processor.print(:current) // where amount is not nil
 ## More examples
 
 Processor.print(:with_address_and_email)
-Processor.print(:current) // amount > 0
+Processor.print("John Doe")
+
 Email.send(:with_email_only)
 
 Donor.filtered(:zero) |> Enum.count
@@ -61,6 +62,14 @@ Email.send(:with_email)
 Donor.create_or_update(%{amount: 100, email: "jane.smith@gmail.com", name: "Jane Smith"})
 donor = Repo.get(Donor, 104)
 Repo.delete(donor)
+
+# Reset donation amount to zero for all donors
+Repo.update_all(Donor, set: [amount: 0])
+
+# Reset receipts, so you could send again
+import Ecto.Query
+query = from(d in Donor, where: d.amount > 0, select: d)
+Repo.update_all(query, set: [receipt_emailed: nil])
 
 psql -U mkreyman -d congregation_dev -c "Cy (Select * From donors LIMIT 2000) To STDOUT With CSV HEADER DELIMITER ',';" > ~/donors_data.csv
 

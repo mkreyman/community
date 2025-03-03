@@ -50,21 +50,25 @@ defmodule Congregation.Donor do
       donor -> donor
     end
     |> Donor.changeset(params)
-    |> Repo.insert_or_update()
     |> case do
-      {:ok, donor} -> {:ok, donor}
-      {:error, changeset} -> {:error, changeset}
+      changeset = %Ecto.Changeset{valid?: false} ->
+        {:error, changeset}
+
+      changeset ->
+        Repo.insert_or_update(changeset)
     end
   end
 
   def update(params) do
-    case Repo.get_by(Donor, name: params[:name]) do
-      nil -> %Donor{name: params[:name]}
-      donor -> donor
-    end
-    |> Donor.changeset(params)
-    |> Repo.update()
-    |> case do
+    donor =
+      case Repo.get_by(Donor, name: params[:name]) do
+        nil -> %Donor{}
+        donor -> donor
+      end
+
+    changeset = Donor.changeset(donor, params)
+
+    case Repo.insert_or_update(changeset) do
       {:ok, donor} -> {:ok, donor}
       {:error, changeset} -> {:error, changeset}
     end
